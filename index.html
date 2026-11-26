@@ -616,7 +616,8 @@
         }
 
         /**
-         * Algorithme de tirage au sort avec Backtracking (garantit une solution valide si elle existe)
+         * Algorithme de tirage au sort avec Backtracking (garantit une solution valide si elle existe,
+         * sans auto-pioche, sans exclusion violée et sans pioche mutuelle A <-> B)
          */
         function solveSecretSanta(participants, exclusions) {
             const n = participants.length;
@@ -653,6 +654,8 @@
                     if (usedReceivers.has(receiver)) continue;
                     if (giver === receiver) continue;
                     if (forbidden.has(`${giver}:::${receiver}`)) continue;
+                    // Interdit que deux personnes se piochent mutuellement (giver -> receiver et receiver -> giver)
+                    if (assignment.get(receiver) === giver) continue;
 
                     assignment.set(giver, receiver);
                     usedReceivers.add(receiver);
@@ -847,7 +850,7 @@ if (copyAllBtn) {
                 const pairs = solveSecretSanta(state.participants, state.exclusions);
 
                 if (!pairs) {
-                    showToast("Tirage impossible avec ces exclusions ! Retirez-en une.", "❌");
+                    showToast("Tirage impossible avec ces règles ou exclusions ! Retirez-en une.", "❌");
                     return;
                 }
 
