@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Secret Santa Magique 🎄</title>
+    <title>Qui gâte qui ?  🎄</title>
     <!-- Chargement de Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Chargement des polices Google Fonts (Playfair Display pour l'élégance festive, Plus Jakarta Sans pour la lisibilité) -->
@@ -108,10 +108,10 @@
     <header class="w-full py-6 px-4 text-center">
         <div class="inline-flex items-center justify-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-1.5 rounded-full shadow-sm border border-amber-200/60 mb-2">
             <span class="text-base">🎄</span>
-            <span class="text-xs font-semibold uppercase tracking-wider text-christmas-green">Tirage 100% Secret & Sans Inscription</span>
+            <span class="text-xs font-semibold uppercase tracking-wider text-christmas-green">Tirage 100% Secret sans pub sans inscription</span>
         </div>
         <h1 class="font-serif text-3xl sm:text-4xl font-bold text-christmas-red tracking-tight">
-            Secret Santa Magique
+            Qui gâte qui ?
         </h1>
     </header>
 
@@ -283,51 +283,7 @@
                         Recommencer un nouveau tirage
                     </button>
                 </div>
-
-                <!-- Encart explicatif + Bouton de téléchargement pour hébergement réel -->
-                <div class="p-4 rounded-2xl bg-amber-50/90 border border-amber-200/80 text-left space-y-3">
-                    <div class="flex items-start gap-3">
-                        <span class="text-xl shrink-0">💡</span>
-                        <div class="text-xs text-stone-700 leading-relaxed">
-                            <strong class="text-stone-900">Important pour le partage WhatsApp :</strong> Si vous êtes dans un aperçu privé (<code class="bg-white px-1.5 py-0.5 rounded border border-amber-200">googleusercontent.com</code>), vos amis ne pourront pas ouvrir directement l'URL d'aperçu. Téléchargez cette page en un clic et déposez-la gratuitement sur <strong>Netlify Drop</strong> ou <strong>Tiiny.host</strong> pour obtenir de vrais liens publics !
-                        </div>
-                    </div>
-                    <div class="flex justify-end">
-                        <button
-                            id="download-app-btn"
-                            type="button"
-                            class="px-4 py-2 rounded-xl bg-christmas-gold hover:bg-amber-700 text-white font-semibold text-xs transition shadow-sm flex items-center gap-2 relative z-10"
-                        >
-                            <span>⬇️</span>
-                            <span>Télécharger la page HTML autonome</span>
-                        </button>
-                    </div>
                 </div>
-            </div>
-
-            <!-- Champ de repli : Tester ou coller un lien / code #reveal=... -->
-            <div class="bg-white/90 rounded-3xl p-5 sm:p-6 shadow-sm border border-stone-200/80 space-y-3">
-                <div class="flex items-center justify-between gap-2">
-                    <span class="text-xs font-bold uppercase tracking-wider text-stone-500">
-                        🔗 Déjà un lien ou un code secret ?
-                    </span>
-                    <span class="text-[11px] text-stone-400">Utile si un lien a perdu son #reveal</span>
-                </div>
-                <form id="manual-reveal-form" class="flex flex-col sm:flex-row gap-2">
-                    <input
-                        type="text"
-                        id="manual-reveal-input"
-                        placeholder="Collez ici l'URL complète ou le code après #reveal=..."
-                        autocomplete="off"
-                        class="flex-grow px-4 py-2.5 rounded-2xl bg-stone-50 border border-stone-200 focus:outline-none focus:ring-2 focus:ring-christmas-gold/30 focus:border-christmas-gold text-xs sm:text-sm transition"
-                    >
-                    <button
-                        type="submit"
-                        class="px-4 py-2.5 rounded-2xl bg-stone-800 hover:bg-stone-900 text-white font-semibold text-xs sm:text-sm transition shrink-0"
-                    >
-                        Ouvrir la révélation
-                    </button>
-                </form>
             </div>
         </div>
 
@@ -454,7 +410,7 @@
 
     <!-- Pied de page -->
     <footer class="w-full py-6 text-center text-xs text-stone-400 px-4">
-        <p>100% privé — Aucune donnée n'est envoyée sur un serveur. Tout est chiffré dans votre lien.</p>
+        <p>© 2026 — Créé par Themas aka Monsieur Thomas LAMART. Tous droits réservés.</p>
     </footer>
 
     <!-- ========================================== -->
@@ -898,16 +854,6 @@
                             >
                                 <span>📋</span>
                                 <span>Copier</span>
-                            </button>
-                            <button
-                                type="button"
-                                data-url="${escapeHtml(secretUrl)}"
-                                data-payload="${escapeHtml(encoded)}"
-                                class="preview-link-btn px-3.5 py-2.5 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-300/80 font-semibold text-xs transition flex items-center justify-center gap-1.5 shadow-sm"
-                                title="Ouvrir / Tester ce lien dans la page"
-                            >
-                                <span>👀</span>
-                                <span>Tester</span>
                             </button>
                             <a 
                                 href="${waUrl}" 
