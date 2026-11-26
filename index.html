@@ -615,9 +615,9 @@
             document.body.removeChild(textArea);
         }
 
-        /**
-         * Algorithme de tirage au sort avec Backtracking (garantit une solution valide si elle existe,
-         * sans auto-pioche, sans exclusion violée et sans pioche mutuelle A <-> B)
+/**
+         * Algorithme de tirage au sort avec Backtracking garantissant UNE SEULE grande boucle
+         * passant par tous les participants (cycle hamiltonien), sans auto-pioche ni exclusion violée.
          */
         function solveSecretSanta(participants, exclusions) {
             const n = participants.length;
@@ -638,40 +638,40 @@
             }
 
             const givers = shuffle(participants);
-            const receiversPool = shuffle(participants);
+            const startPerson = givers[0];
             const assignment = new Map();
-            const usedReceivers = new Set();
+            const visited = new Set([startPerson]);
 
-            function backtrack(index) {
-                if (index === n) {
+            function backtrack(currentGiver, step) {
+                // Au dernier participant, on ferme obligatoirement la boucle vers startPerson
+                if (step === n - 1) {
+                    if (forbidden.has(`${currentGiver}:::${startPerson}`)) {
+                        return false;
+                    }
+                    assignment.set(currentGiver, startPerson);
                     return true;
                 }
 
-                const giver = givers[index];
-                const candidates = shuffle(receiversPool);
-
+                const candidates = shuffle(participants);
                 for (const receiver of candidates) {
-                    if (usedReceivers.has(receiver)) continue;
-                    if (giver === receiver) continue;
-                    if (forbidden.has(`${giver}:::${receiver}`)) continue;
-                    // Interdit que deux personnes se piochent mutuellement (giver -> receiver et receiver -> giver)
-                    if (assignment.get(receiver) === giver) continue;
+                    if (visited.has(receiver)) continue;
+                    if (forbidden.has(`${currentGiver}:::${receiver}`)) continue;
 
-                    assignment.set(giver, receiver);
-                    usedReceivers.add(receiver);
+                    assignment.set(currentGiver, receiver);
+                    visited.add(receiver);
 
-                    if (backtrack(index + 1)) {
+                    if (backtrack(receiver, step + 1)) {
                         return true;
                     }
 
-                    assignment.delete(giver);
-                    usedReceivers.delete(receiver);
+                    assignment.delete(currentGiver);
+                    visited.delete(receiver);
                 }
 
                 return false;
             }
 
-            const success = backtrack(0);
+            const success = backtrack(startPerson, 0);
             if (!success) return null;
 
             return participants.map(giver => ({
